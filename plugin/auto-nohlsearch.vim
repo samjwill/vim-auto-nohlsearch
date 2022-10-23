@@ -6,11 +6,17 @@ endif
 
 let s:enter_was_pressed = 0
 
-function! s:handle_cursor_moved()
-    if (g:auto_nohlsearch_enabled == v:false)
-        return
+function! s:set_hlsearch(enable)
+    if (g:auto_nohlsearch_enabled == v:true)
+        if (a:enable)
+            set hlsearch
+        else
+            set nohlsearch
+        endif
     endif
+endfunction
 
+function! s:handle_cursor_moved()
     if &hlsearch == 0 "See :h expr-option
         return
     endif
@@ -21,39 +27,23 @@ function! s:handle_cursor_moved()
         "Limit search to current line, starting with character under cursor
         let pos_of_next_match = searchpos(last_search, "cnz", cursor_pos[0])
         if cursor_pos != pos_of_next_match
-            set nohlsearch
+            call <SID>set_hlsearch(v:false)
         endif
   endif
 endfunction
 
 function! s:handle_cmdline_leave()
-    if (g:auto_nohlsearch_enabled == v:false)
-        return
-    endif
-
     if (!s:enter_was_pressed)
-        set nohlsearch
+        call <SID>set_hlsearch(v:false)
     else
         let s:enter_was_pressed = 0
-        set hlsearch
+        call <SID>set_hlsearch(v:true)
     endif
 endfunction
 
 function! s:handle_enter_pressed_in_cmdline()
-    if (g:auto_nohlsearch_enabled == v:true)
-        let s:enter_was_pressed = 1
-    endif
+    let s:enter_was_pressed = 1
     return "\<CR>"
-endfunction
-
-function! s:set_hlsearch(enable)
-    if (g:auto_nohlsearch_enabled == v:true)
-        if (a:enable)
-            set hlsearch
-        else
-            set nohlsearch
-        endif
-    endif
 endfunction
 
 function! s:handle_cmdwin_enter()
