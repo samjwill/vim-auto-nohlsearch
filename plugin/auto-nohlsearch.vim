@@ -57,15 +57,11 @@ function! s:set_hlsearch(enable)
 endfunction
 
 function! s:handle_cmdwin_enter()
-    if (g:auto_nohlsearch_enabled == v:true)
-        nnoremap <CR> <CMD>let s:enter_was_pressed = 1<CR><CR>
-    endif
+    nnoremap <CR> <CMD>let s:enter_was_pressed = 1<CR><CR>
 endfunction
 
 function! s:handle_cmdwin_leave()
-    if (g:auto_nohlsearch_enabled == v:true)
-        nunmap <CR>
-    endif
+    nunmap <CR>
 endfunction
 
 augroup AUTO_NOHLSEARCH_CMDS | autocmd!
