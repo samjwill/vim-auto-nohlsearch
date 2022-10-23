@@ -7,11 +7,11 @@ searching a buffer.
 
 #### Using [vim-plug](https://github.com/junegunn/vim-plug):
 
-    Plug 'samjwill/nvim-unception'
+    Plug 'samjwill/vim-auto-nohlsearch'
 
 #### Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
-    use "samjwill/nvim-unception"
+    use "samjwill/vim-auto-nohlsearch"
 
 # Settings
 
