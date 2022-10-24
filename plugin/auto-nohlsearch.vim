@@ -62,6 +62,9 @@ augroup AUTO_NOHLSEARCH_CMDS | autocmd!
      autocmd CmdwinLeave [\/\?] call <SID>handle_cmdwin_leave()
      autocmd CursorMoved * call <SID>handle_cursor_moved()
      autocmd InsertEnter * call <SID>set_hlsearch(v:false)
+     if has('nvim')
+        autocmd TermEnter * call <SID>set_hlsearch(v:false)
+     endif
 augroup end
 
 cnoremap <silent><expr> <CR> <SID>handle_enter_pressed_in_cmdline()
