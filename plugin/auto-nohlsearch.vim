@@ -4,7 +4,7 @@ if (!exists("g:auto_nohlsearch_enabled"))
     let g:auto_nohlsearch_enabled = v:true
 endif
 
-let s:enter_was_pressed = 0
+let g:vim_auto_nohlsearch_enter_was_pressed = 0
 
 function! s:set_hlsearch(enable)
     if (g:auto_nohlsearch_enabled == v:true)
@@ -33,21 +33,21 @@ function! s:handle_cursor_moved()
 endfunction
 
 function! s:handle_cmdline_leave()
-    if (!s:enter_was_pressed)
+    if (!g:vim_auto_nohlsearch_enter_was_pressed)
         call <SID>set_hlsearch(v:false)
     else
-        let s:enter_was_pressed = 0
+        let g:vim_auto_nohlsearch_enter_was_pressed = 0
         call <SID>set_hlsearch(v:true)
     endif
 endfunction
 
 function! s:handle_enter_pressed_in_cmdline()
-    let s:enter_was_pressed = 1
+    let g:vim_auto_nohlsearch_enter_was_pressed = 1
     return "\<CR>"
 endfunction
 
 function! s:handle_cmdwin_enter()
-    nnoremap <CR> <CMD>let s:enter_was_pressed = 1<CR><CR>
+    nnoremap <CR> <CMD>let g:vim_auto_nohlsearch_enter_was_pressed = 1<CR><CR>
 endfunction
 
 function! s:handle_cmdwin_leave()
