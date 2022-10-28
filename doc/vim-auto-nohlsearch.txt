@@ -3,7 +3,7 @@ vim-auto-nohlsearch.txt
                                                 *auto-nohlsearch*
 INTRODUCTION                                    *vim-auto-nohlsearch*
 
-A plugin that automatically sets 'hlsearch' when a new search begins, and sets
+A plugin that automatically sets |'hlsearch'| when a new search begins, and sets
 |'nohlsearch'| when a search ends.
 
 
@@ -15,7 +15,7 @@ COMMANDS                                        *vim-auto-nohlsearch-commands*
 
 OPTIONS                                         *vim-auto-nohlsearch-options*
 
-*g:auto_nohlsearch_enabled*    If true, automatically sets 'hlsearch' when a
+*g:auto_nohlsearch_enabled*    If true, automatically sets |'hlsearch'| when a
 (default = true)             new search begins, and sets |'nohlsearch'| when a
                              search ends. If false, the |'hlsearch'| setting
                              is left alone.
