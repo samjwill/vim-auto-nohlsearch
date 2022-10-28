@@ -9,11 +9,11 @@ endfunction
 
 command AutoNohlsearchToggle call <SID>toggle_enabled()
 
-let g:vim_auto_nohlsearch_enter_was_pressed = 0
-
 "------------------------------------------------------------------------------
 
 "Turn off search highlighting once done searching
+let s:enter_was_pressed = v:false
+
 function! s:set_hlsearch(enable)
     if (g:auto_nohlsearch_enabled == v:true)
         if (a:enable)
@@ -41,21 +41,27 @@ function! s:handle_cursor_moved()
 endfunction
 
 function! s:handle_cmdline_leave()
-    if (!g:vim_auto_nohlsearch_enter_was_pressed)
+    if (!s:enter_was_pressed)
         call <SID>set_hlsearch(v:false)
     else
-        let g:vim_auto_nohlsearch_enter_was_pressed = 0
+        let s:enter_was_pressed = v:false
         call <SID>set_hlsearch(v:true)
     endif
 endfunction
 
 function! s:handle_enter_pressed_in_cmdline()
-    let g:vim_auto_nohlsearch_enter_was_pressed = 1
+    let s:enter_was_pressed = v:true
     return "\<CR>"
 endfunction
 
+function! s:set_enter_was_pressed(was_pressed)
+    let s:enter_was_pressed = a:was_pressed
+endfunction
+
 function! s:handle_cmdwin_enter()
-    nnoremap <CR> <CMD>let g:vim_auto_nohlsearch_enter_was_pressed = 1<CR><CR>
+    " Needs to call a function since script-local variables cannot be accessed
+    " directly in mappings.
+    nnoremap <CR> :call <SID>set_enter_was_pressed(v:true)<CR><CR>
 endfunction
 
 function! s:handle_cmdwin_leave()
