@@ -9,8 +9,8 @@ A plugin that automatically sets 'hlsearch' when a new search begins, and sets
 
 COMMANDS                                        *vim-auto-nohlsearch-commands*
 
-*:AutoNohlsearchToggle*        Toggles the vim-auto-nohlsearch on or off and
-                             sets |'hlsearch'| to true.
+*:AutoNohlsearchToggle*        Toggles vim-auto-nohlsearch on or off and sets
+                             |'hlsearch'| to true.
 
 
 OPTIONS                                         *vim-auto-nohlsearch-options*
