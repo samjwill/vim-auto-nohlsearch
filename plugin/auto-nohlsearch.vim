@@ -1,11 +1,19 @@
-"Turn off search highlighting once done searching
-
 if (!exists("g:auto_nohlsearch_enabled"))
     let g:auto_nohlsearch_enabled = v:true
 endif
 
+function! s:toggle_enabled()
+    let g:auto_nohlsearch_enabled = !g:auto_nohlsearch_enabled
+    set hlsearch
+endfunction
+
+command AutoNohlsearchToggle call <SID>toggle_enabled()
+
 let g:vim_auto_nohlsearch_enter_was_pressed = 0
 
+"------------------------------------------------------------------------------
+
+"Turn off search highlighting once done searching
 function! s:set_hlsearch(enable)
     if (g:auto_nohlsearch_enabled == v:true)
         if (a:enable)
@@ -77,3 +85,4 @@ noremap <silent> g* g*<CMD>call <SID>set_hlsearch(v:true)<CR>
 noremap <silent> g# g#<CMD>call <SID>set_hlsearch(v:true)<CR>
 noremap <silent> gd gd<CMD>call <SID>set_hlsearch(v:true)<CR>
 noremap <silent> gD gD<CMD>call <SID>set_hlsearch(v:true)<CR>
+
