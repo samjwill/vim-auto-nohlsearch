@@ -9,11 +9,11 @@ endfunction
 
 command AutoNohlsearchToggle call <SID>toggle_enabled()
 
-let g:vim_auto_nohlsearch_enter_was_pressed = 0
-
 "------------------------------------------------------------------------------
 
 "Turn off search highlighting once done searching
+let g:vim_auto_nohlsearch_enter_was_pressed = 0
+
 function! s:set_hlsearch(enable)
     if (g:auto_nohlsearch_enabled == v:true)
         if (a:enable)
