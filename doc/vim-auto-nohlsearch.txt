@@ -3,8 +3,8 @@ vim-auto-nohlsearch.txt
                                                 *auto-nohlsearch*
 INTRODUCTION                                    *vim-auto-nohlsearch*
 
-A plugin that automatically turns off |'hlsearch'| when you're finished
-searching a buffer.
+A plugin that automatically sets 'hlsearch' when a new search begins, and sets
+|'nohlsearch'| when a search ends.
 
 
 COMMANDS                                        *vim-auto-nohlsearch-commands*
@@ -15,8 +15,9 @@ COMMANDS                                        *vim-auto-nohlsearch-commands*
 
 OPTIONS                                         *vim-auto-nohlsearch-options*
 
-*g:auto_nohlsearch_enabled*    If true, automatically sets |'nohlsearch'| when a
-(default = true)             search ends. If false, the |'hlsearch'| setting is
-                             left alone.
+*g:auto_nohlsearch_enabled*    If true, automatically sets 'hlsearch' when a
+(default = true)             new search begins, and sets |'nohlsearch'| when a
+                             search ends. If false, the |'hlsearch'| setting
+                             is left alone.
 
 vim:ft=help:norl:
