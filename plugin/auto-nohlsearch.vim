@@ -31,13 +31,15 @@ function! s:handle_cursor_moved()
 
     let last_search = @/
     if last_search != ""
-        let cursor_pos = [line("."), col(".")]
-        "Limit search to current line, starting with character under cursor
-        let pos_of_next_match = searchpos(last_search, "cnz", cursor_pos[0])
-        if cursor_pos != pos_of_next_match
+        let cursor_column = col(".")
+        " Force the pattern to match at the current cursor column.
+        let pattern_at_cursor = '\%' . cursor_column . 'c' . last_search
+        let match_at_cursor = match(getline("."), pattern_at_cursor) != -1
+
+        if !match_at_cursor
             call <SID>set_hlsearch(v:false)
         endif
-  endif
+    endif
 endfunction
 
 function! s:handle_cmdline_leave()
